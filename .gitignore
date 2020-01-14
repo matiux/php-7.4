@@ -1,0 +1,26 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> Docker ###
+/docker/docker-compose.override.yml
+/docker/php/ssh
+/docker/php/git
+/docker/data/shell_history/.zsh_history
+###< Docker ###
+
+###> Misc ###
+.idea
+###< Misc ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

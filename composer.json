@@ -1,0 +1,27 @@
+{
+  "name": "matiux/php74",
+  "license": "",
+  "authors": [
+    {
+      "name": "Matteo Galacci",
+      "email": "m.galacci@gmail.com",
+      "homepage": "https://www.matteogalacci.it",
+      "role": "Software architect | Back-end developer"
+    }
+  ],
+  "require": {
+    "php": "~7.4",
+    "monolog/monolog": "^2.0",
+    "symfony/console": "^5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Php74\\": "src/Php74/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}

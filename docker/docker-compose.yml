@@ -1,0 +1,23 @@
+version: '3.7'
+
+volumes:
+  app_database:
+  app_cache: {}
+
+networks:
+  php74_net:
+    driver: bridge
+    name: php74_net
+
+services:
+
+  php_74:
+    build: php
+    hostname: app_hostname
+    volumes:
+      - ../:/var/www/app
+      - ./data/shell_history:/home/utente/shell_history
+    networks:
+      - php74_net
+    environment:
+      - HISTFILE=/home/utente/shell_history/.x_history
