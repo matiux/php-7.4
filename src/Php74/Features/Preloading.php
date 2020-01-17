@@ -24,4 +24,9 @@ class Preloading extends Feature
 
       $this->printOutput([$text], '1) Preloading');
    }
+
+   public static function shortFeatureName(): string
+   {
+      return 'preload';
+   }
 }

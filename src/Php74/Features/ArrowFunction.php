@@ -23,6 +23,11 @@ class ArrowFunction extends Feature
       return parent::create($output);
    }
 
+   public static function shortFeatureName(): string
+   {
+      return 'arrow';
+   }
+
    public function execute()
    {
       $this->printOutput($this->cube([1, 2]), '1) Basic usage: cube');
@@ -66,6 +71,10 @@ class ArrowFunction extends Feature
       return array_map(fn(int $number) => $number * $number * $number, $this->numbers);
    }
 
+   /**
+    * Purtroppo ancora non si può :(
+    */
+   //fn getNumbers(): array => $this->numbers;
    public function signature(): string
    {
       /**
@@ -90,10 +99,7 @@ class ArrowFunction extends Feature
       }
    }
 
-   /**
-    * Purtroppo ancora non si può :(
-    */
-   //fn getNumbers(): array => $this->numbers;
+
    public function nested(): int
    {
       $var = 6;

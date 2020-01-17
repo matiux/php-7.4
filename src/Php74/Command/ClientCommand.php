@@ -5,6 +5,7 @@ namespace Php74\Command;
 use Php74\Features\ArrowFunction;
 use Php74\Features\NullCoalescing;
 use Php74\Features\Preloading;
+use Php74\Features\SpreadOperator;
 use Php74\Features\TypedProperty;
 use Php74\Features\TypeVariance\Contravariance\Contravariance;
 use Php74\Features\TypeVariance\Covariance\Covariance;
@@ -24,12 +25,13 @@ class ClientCommand extends Command
    protected function configure()
    {
       $this->availableFeature = [
-         'arrow',
-         'preload',
-         'typed',
-         'cova',
-         'contrava',
-         'null'
+         ArrowFunction::shortFeatureName(),
+         Preloading::shortFeatureName(),
+         TypedProperty::shortFeatureName(),
+         Covariance::shortFeatureName(),
+         Contravariance::shortFeatureName(),
+         NullCoalescing::shortFeatureName(),
+         SpreadOperator::shortFeatureName()
       ];
 
       $this
@@ -43,29 +45,38 @@ class ClientCommand extends Command
    {
       system('clear');
 
+      $ffi = FFI::cdef(
+         "int printf(const char *format, ...);", // this is a regular C declaration
+         "libc.so.6");
+// call C's printf()
+      $ffi->printf("Hello %s!\n", "world");
+
       $this->decorateOutput($output);
       $this->validateInputFeature($input);
 
       $feature = $input->getArgument('feature');
 
       switch ($feature) {
-         case 'arrow':
+         case  ArrowFunction::shortFeatureName():
             ArrowFunction::create($output)->execute();
             break;
-         case 'preload':
+         case Preloading::shortFeatureName():
             Preloading::create($output)->execute();
             break;
-         case 'typed':
+         case TypedProperty::shortFeatureName():
             TypedProperty::create($output)->execute();
             break;
-         case 'cova':
+         case Covariance::shortFeatureName():
             Covariance::create($output)->execute();
             break;
-         case 'contrava':
+         case Contravariance::shortFeatureName():
             Contravariance::create($output)->execute();
             break;
-         case 'null':
+         case NullCoalescing::shortFeatureName():
             NullCoalescing::create($output)->execute();
+            break;
+         case SpreadOperator::shortFeatureName():
+            SpreadOperator::create($output)->execute();
             break;
       }
 

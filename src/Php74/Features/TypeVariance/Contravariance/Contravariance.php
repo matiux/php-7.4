@@ -52,4 +52,9 @@ class Contravariance extends Feature
          si tratta di un "Cat" o "Dog".
       EOT;
    }
+
+   public static function shortFeatureName(): string
+   {
+      return 'contrava';
+   }
 }

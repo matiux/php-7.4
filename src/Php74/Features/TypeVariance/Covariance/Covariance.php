@@ -43,4 +43,9 @@ class Covariance extends Feature
          essere restituita e possiamo trattare tutti questi valori allo stesso modo.
       EOT;
    }
+
+   public static function shortFeatureName(): string
+   {
+      return 'cova';
+   }
 }

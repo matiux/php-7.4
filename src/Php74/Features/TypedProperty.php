@@ -87,5 +87,10 @@ class TypedProperty extends Feature
             Fatal error: Uncaught TypeError: Typed property Bar::\$i must be int, string used
       EOT;
    }
+
+   public static function shortFeatureName(): string
+   {
+      return 'typed';
+   }
 }
 

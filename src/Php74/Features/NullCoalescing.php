@@ -64,4 +64,9 @@ class NullCoalescing extends Feature
    {
       return $data['name'] ??= 'nobody';
    }
+
+   public static function shortFeatureName(): string
+   {
+      return 'null';
+   }
 }

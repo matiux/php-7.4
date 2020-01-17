@@ -18,3 +18,4 @@ composer install
 * cova - [Covariance](https://www.php.net/manual/en/language.oop5.variance.php)
 * contrava - [Contravariance](https://www.php.net/manual/en/language.oop5.variance.php) 
 * null - [Null coalescing assignment operator](https://stitcher.io/blog/new-in-php-74#null-coalescing-assignment-operator-rfc) 
+* spread - [Spread operator for array](https://wiki.php.net/rfc/spread_operator_for_array) 

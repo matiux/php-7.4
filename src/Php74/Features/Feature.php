@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class Feature
 {
-   protected OutputInterface $output;
+   private OutputInterface $output;
 
    public function __construct(OutputInterface $output)
    {
@@ -19,6 +19,8 @@ abstract class Feature
    {
       return new static($output);
    }
+
+   abstract public static function shortFeatureName(): string;
 
    abstract public function execute();
 
