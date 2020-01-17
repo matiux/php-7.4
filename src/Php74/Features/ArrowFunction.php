@@ -2,6 +2,7 @@
 
 namespace Php74\Features;
 
+use Symfony\Component\Console\Output\OutputInterface;
 use TypeError;
 
 /**
@@ -13,13 +14,22 @@ use TypeError;
  * https://wiki.php.net/rfc/arrow_functions_v2
  * https://stitcher.io/blog/short-closures-in-php
  */
-class ArrowFunction
+class ArrowFunction extends Feature
 {
-   private array $numbers;
+   private array $numbers = [1, 2];
 
-   public function __construct(array $numbers)
+   public static function create(OutputInterface $output)
    {
-      $this->numbers = $numbers;
+      return parent::create($output);
+   }
+
+   public function execute()
+   {
+      $this->printOutput($this->cube([1, 2]), '1) Basic usage: cube');
+      $this->printOutput([$this->scope()], '2) Parent scope');
+      $this->printOutput($this->thisScope(), '3) This scope');
+      $this->printOutput([$this->signature()], '4) Signature');
+      $this->printOutput([$this->nested()], '5) Nested');
    }
 
    public function cube(array $inputNumbers): array
@@ -80,6 +90,10 @@ class ArrowFunction
       }
    }
 
+   /**
+    * Purtroppo ancora non si può :(
+    */
+   //fn getNumbers(): array => $this->numbers;
    public function nested(): int
    {
       $var = 6;
@@ -93,9 +107,4 @@ class ArrowFunction
 
       return (fn() => fn() => $var)()();
    }
-
-   /**
-    * Purtroppo ancora non si può :(
-    */
-   //fn getNumbers(): array => $this->numbers;
 }

@@ -11,7 +11,7 @@ use Php74\Features\Misc\Email;
  * https://wiki.php.net/rfc/typed_properties_v2
  * https://stitcher.io/blog/typed-properties-in-php-74
  */
-class TypedProperty
+class TypedProperty extends Feature
 {
    protected static string $foo = 'bar';
    public string $address;
@@ -32,11 +32,18 @@ class TypedProperty
       return $this->address;
    }
 
+   public function execute()
+   {
+      $this->printOutput([$this->getErrorFromOutputBuffer(fn() => $this->oldDeclaration())], '1) Assignment without type');
+      $this->printOutput([$this->text()], '2) Info');
+   }
+
    public function oldDeclaration()
    {
       /**
-       * Dato che $oldAddress non ha un tipo, il suo valore di inizializzazione è NULL. Tuttavia, i tipi possono essere nullable, quindi non è possibile
-       * determinare se è stata impostata una proprietà nullable digitata o semplicemente dimenticata.
+       * Dato che $oldAddress non ha un tipo, il suo valore di inizializzazione è NULL. Tuttavia, i tipi possono
+       * essere nullable, quindi non è possibile determinare se è stata impostata una proprietà nullable digitata
+       * o semplicemente dimenticata.
        * Ecco perché è stato aggiunto "uninitialized".
        */
       return $this->oldAddress;

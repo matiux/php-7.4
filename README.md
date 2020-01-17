@@ -12,6 +12,9 @@ composer install
 ```
 
 ## Lista delle features:
-* arrow-func - [Arrow functions](https://stitcher.io/blog/short-closures-in-php)
+* arrow - [Arrow functions](https://stitcher.io/blog/short-closures-in-php)
 * preload - [Preloading](https://stitcher.io/blog/preloading-in-php-74)
 * typed - [Typed properties](https://stitcher.io/blog/typed-properties-in-php-74)
+* cova - [Covariance](https://www.php.net/manual/en/language.oop5.variance.php)
+* contrava - [Contravariance](https://www.php.net/manual/en/language.oop5.variance.php) 
+* null - [Null coalescing assignment operator](https://stitcher.io/blog/new-in-php-74#null-coalescing-assignment-operator-rfc) 
