@@ -17,7 +17,15 @@ abstract class Feature
 
    public static function create(OutputInterface $output)
    {
-      return new static($output);
+      $obj = new static($output);
+
+      $obj->bootstrap();
+
+      return $obj;
+   }
+
+   protected function bootstrap(): void
+   {
    }
 
    abstract public static function shortFeatureName(): string;

@@ -21,3 +21,4 @@ services:
       - php74_net
     environment:
       - HISTFILE=/home/utente/shell_history/.x_history
+#      - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/www/app/pripper

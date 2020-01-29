@@ -12,6 +12,7 @@ all: build_go build_c
 
 build_go:
 	$(GOBUILD) -o $(GOLIB) -buildmode=c-shared go_pripper.go
+	cp go_pripper.header go_pripper.h
 
 build_c:
 	$(CCMD) -c -g c_pripper.c
@@ -22,7 +23,8 @@ build_c:
 .PHONY: clean
 clean:
 	-rm -f *.o $(objects)
+	-rm -f *.a $(objects)
 	-rm -f *.so $(objects)
 	-rm -f pripper $(objects)
-	-rm -f go_pripper.h $(objects)
+	#-rm -f go_pripper.header $(objects)
 	-rm -f core $(objects)

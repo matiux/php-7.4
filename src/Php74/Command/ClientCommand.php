@@ -3,6 +3,7 @@
 namespace Php74\Command;
 
 use Php74\Features\ArrowFunction;
+use Php74\Features\ForeignFunction;
 use Php74\Features\NullCoalescing;
 use Php74\Features\Preloading;
 use Php74\Features\SpreadOperator;
@@ -31,7 +32,8 @@ class ClientCommand extends Command
          Covariance::shortFeatureName(),
          Contravariance::shortFeatureName(),
          NullCoalescing::shortFeatureName(),
-         SpreadOperator::shortFeatureName()
+         SpreadOperator::shortFeatureName(),
+         ForeignFunction::shortFeatureName(),
       ];
 
       $this
@@ -45,45 +47,37 @@ class ClientCommand extends Command
    {
       system('clear');
 
-      $ffi = \FFI::cdef(
-         "int printf(const char *format, ...);", // this is a regular C declaration
-         "libc.so.6");
+      $this->decorateOutput($output);
+      $this->validateInputFeature($input);
 
-      // call C's printf()
-      $ffi->printf("Hello %s!\n", "world");
+      $feature = $input->getArgument('feature');
 
-//      echo getcwd()."\n";
-
-      $ffiPripper = \FFI::load(getcwd() . '/pripper/go_pripper.h');
-      $ffiPripper->CPripper('aa');
-//      $this->decorateOutput($output);
-//      $this->validateInputFeature($input);
-//
-//      $feature = $input->getArgument('feature');
-//
-//      switch ($feature) {
-//         case  ArrowFunction::shortFeatureName():
-//            ArrowFunction::create($output)->execute();
-//            break;
-//         case Preloading::shortFeatureName():
-//            Preloading::create($output)->execute();
-//            break;
-//         case TypedProperty::shortFeatureName():
-//            TypedProperty::create($output)->execute();
-//            break;
-//         case Covariance::shortFeatureName():
-//            Covariance::create($output)->execute();
-//            break;
-//         case Contravariance::shortFeatureName():
-//            Contravariance::create($output)->execute();
-//            break;
-//         case NullCoalescing::shortFeatureName():
-//            NullCoalescing::create($output)->execute();
-//            break;
-//         case SpreadOperator::shortFeatureName():
-//            SpreadOperator::create($output)->execute();
-//            break;
-//      }
+      switch ($feature) {
+         case  ArrowFunction::shortFeatureName():
+            ArrowFunction::create($output)->execute();
+            break;
+         case Preloading::shortFeatureName():
+            Preloading::create($output)->execute();
+            break;
+         case TypedProperty::shortFeatureName():
+            TypedProperty::create($output)->execute();
+            break;
+         case Covariance::shortFeatureName():
+            Covariance::create($output)->execute();
+            break;
+         case Contravariance::shortFeatureName():
+            Contravariance::create($output)->execute();
+            break;
+         case NullCoalescing::shortFeatureName():
+            NullCoalescing::create($output)->execute();
+            break;
+         case SpreadOperator::shortFeatureName():
+            SpreadOperator::create($output)->execute();
+            break;
+         case ForeignFunction::shortFeatureName():
+            ForeignFunction::create($output)->execute();
+            break;
+      }
 
       return 0;
    }
