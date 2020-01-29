@@ -45,40 +45,45 @@ class ClientCommand extends Command
    {
       system('clear');
 
-      $ffi = FFI::cdef(
+      $ffi = \FFI::cdef(
          "int printf(const char *format, ...);", // this is a regular C declaration
          "libc.so.6");
-// call C's printf()
+
+      // call C's printf()
       $ffi->printf("Hello %s!\n", "world");
 
-      $this->decorateOutput($output);
-      $this->validateInputFeature($input);
+//      echo getcwd()."\n";
 
-      $feature = $input->getArgument('feature');
-
-      switch ($feature) {
-         case  ArrowFunction::shortFeatureName():
-            ArrowFunction::create($output)->execute();
-            break;
-         case Preloading::shortFeatureName():
-            Preloading::create($output)->execute();
-            break;
-         case TypedProperty::shortFeatureName():
-            TypedProperty::create($output)->execute();
-            break;
-         case Covariance::shortFeatureName():
-            Covariance::create($output)->execute();
-            break;
-         case Contravariance::shortFeatureName():
-            Contravariance::create($output)->execute();
-            break;
-         case NullCoalescing::shortFeatureName():
-            NullCoalescing::create($output)->execute();
-            break;
-         case SpreadOperator::shortFeatureName():
-            SpreadOperator::create($output)->execute();
-            break;
-      }
+      $ffiPripper = \FFI::load(getcwd() . '/pripper/go_pripper.h');
+      $ffiPripper->CPripper('aa');
+//      $this->decorateOutput($output);
+//      $this->validateInputFeature($input);
+//
+//      $feature = $input->getArgument('feature');
+//
+//      switch ($feature) {
+//         case  ArrowFunction::shortFeatureName():
+//            ArrowFunction::create($output)->execute();
+//            break;
+//         case Preloading::shortFeatureName():
+//            Preloading::create($output)->execute();
+//            break;
+//         case TypedProperty::shortFeatureName():
+//            TypedProperty::create($output)->execute();
+//            break;
+//         case Covariance::shortFeatureName():
+//            Covariance::create($output)->execute();
+//            break;
+//         case Contravariance::shortFeatureName():
+//            Contravariance::create($output)->execute();
+//            break;
+//         case NullCoalescing::shortFeatureName():
+//            NullCoalescing::create($output)->execute();
+//            break;
+//         case SpreadOperator::shortFeatureName():
+//            SpreadOperator::create($output)->execute();
+//            break;
+//      }
 
       return 0;
    }

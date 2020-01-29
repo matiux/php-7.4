@@ -17,6 +17,10 @@
 
 ###> Misc ###
 .idea
+*.so
+*.o
+pripper/pripper
+pripper/go_pripper.h
 ###< Misc ###
 
 ###> symfony/phpunit-bridge ###

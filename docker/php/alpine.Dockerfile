@@ -1,15 +1,13 @@
-FROM matiux/php:7.4.2-fpm-buster-dev
+FROM matiux/php:7.4.1-fpm-alpine3.11-dev
 
 USER root
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    golang \
-    iproute2 \
+RUN apk add --no-cache --virtual .persistent-deps \
     libffi-dev \
-    ssh \
-    strace \
     && docker-php-ext-configure ffi --with-ffi \
-    && docker-php-ext-install ffi
+    && docker-php-ext-install ffi \
+    && apk add \
+    openssh
 
 COPY conf/xdebug-starter.sh /usr/local/bin/xdebug-starter
 RUN chmod +x /usr/local/bin/xdebug-starter
