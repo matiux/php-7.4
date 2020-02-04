@@ -16,7 +16,7 @@ class Preloading extends Feature
       $text = <<<EOT
          Si tratta di una feature di basso livello ed è un'aggiunta al core di PHP 7.4 che può comportare miglioramenti significativi delle prestazioni.
 
-         In breve,utilizzando ad esempio un framework, i suoi file devono essere caricati e linkati ad ogni richiesta. Il precaricamento consente al server
+         In breve, utilizzando ad esempio un framework, i suoi file devono essere caricati e linkati ad ogni richiesta. Il precaricamento consente al server
          di caricare file PHP in memoria all'avvio e di averli permanentemente disponibili per tutte le richieste successive.
 
          L'aumento delle prestazioni ha ovviamente un costo: se i sorgenti dei file precaricati vengono modificati, il server deve essere riavviato.

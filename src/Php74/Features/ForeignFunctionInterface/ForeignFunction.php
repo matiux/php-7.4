@@ -1,8 +1,9 @@
 <?php
 
-namespace Php74\Features;
+namespace Php74\Features\ForeignFunctionInterface;
 
 use FFI;
+use Php74\Features\Feature;
 
 class ForeignFunction extends Feature
 {
@@ -28,17 +29,13 @@ class ForeignFunction extends Feature
    private function cdef(): string
    {
       $ffi = FFI::cdef("
-
          typedef char buffer[50];
-
          int sprintf(char *str, const char *format, ...);
-
          ", // this is a regular C declaration
          "libc.so.6");
 
 
-
-      $output=$ffi->new("buffer");
+      $output = $ffi->new("buffer");
 
       // call C's printf()
       $ffi->sprintf($output, "Hello %s!", "world");

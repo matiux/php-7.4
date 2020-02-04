@@ -12,23 +12,30 @@ namespace Php74\Features;
  */
 class NullCoalescing extends Feature
 {
+   public static function shortFeatureName(): string
+   {
+      return 'null';
+   }
+
    public function execute()
    {
-      $v1 = $this->php70NullCoalescingV1(['name' => 'Matteo']);
-      $v2 = $this->php70NullCoalescingV2([]);
-      $v2a = $this->php70NullCoalescingV2a(['name' => 'Matteo']);
-      $v3 = $this->php70NullCoalescingV3([]);
-      $v4 = $this->nullCoalescingAssignmentOperator(['name' => 'Matteo']);
+      $v1 = $this->phpXNullCoalescingV1();
+      $v2 = $this->phpXNullCoalescingV2();
+      $v2a = $this->phpXNullCoalescingV2a();
+      $v3 = $this->php70NullCoalescing();
+      $v4 = $this->nullCoalescingAssignmentOperator();
 
       $this->printOutput([$v1], '1) Null identification in php 7.0 - V1');
       $this->printOutput([$v2], '2) Null identification in php 7.0 - V2');
       $this->printOutput([$v2a], '3) Null identification in php 7.0 - V2a');
       $this->printOutput([$v3], '4) Null identification in php 7.0 - V3');
-      $this->printOutput([$v4], '4) Null identification in php 7.4');
+      $this->printOutput([$v4], '5) Null identification in php 7.4');
    }
 
-   public function php70NullCoalescingV1(array $data): string
+   public function phpXNullCoalescingV1(): string
    {
+      $data = ['name' => 'Matteo'];
+
       if (isset($data['name'])) {
 
          $name = $data['name'];
@@ -41,32 +48,49 @@ class NullCoalescing extends Feature
       return $name;
    }
 
-   public function php70NullCoalescingV2(array $data): string
+   public function phpXNullCoalescingV2(): string
    {
+      $data = [];
+
       return isset($data['name']) ? $data['name'] : 'nobody';
    }
 
-   public function php70NullCoalescingV2a(array $data): string
+   public function phpXNullCoalescingV2a(): string
    {
+      $data = ['name' => 'Matteo'];
+
       /**
        * Se fossimo certi che la chiave `name` esiste
        */
       return $data['name'] ?: 'nobody';
    }
 
-   public function php70NullCoalescingV3(array $data): string
+   public function php70NullCoalescing(): string
    {
+      $data = [];
+
+//      Equivalente:
+//      if (isset($_GET['user'])) {
+//         return $_GET['user'];
+//      } else {
+//         return 'nobody';
+//      }
+
       // Recupera il valore di $data['name'] e restituisce 'nobody' se non esiste.
-      return $data['name'] ?? 'nobody';
+      $data['name'] = $data['name'] ?? 'nobody';
+
+      return $data['name'];
    }
 
-   public function nullCoalescingAssignmentOperator(array $data)
+   public function nullCoalescingAssignmentOperator()
    {
+      $data = ['name' => 'Matteo'];
+
+//      Equivalente:
+//      if (!isset($data['name'])) {
+//         $data['name'] = 'nobody';
+//      }
+
       return $data['name'] ??= 'nobody';
-   }
-
-   public static function shortFeatureName(): string
-   {
-      return 'null';
    }
 }

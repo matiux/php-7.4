@@ -13,6 +13,6 @@ final class Dog extends Animal
 
    public function eat(Food $food): string
    {
-      return $this->name . " nom noms " . get_class($food);
+      return $this->name . " eats " . get_class($food);
    }
 }

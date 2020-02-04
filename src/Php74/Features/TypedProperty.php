@@ -20,6 +20,11 @@ class TypedProperty extends Feature
    public array $numbers;
    public $oldAddress;
 
+   public static function shortFeatureName(): string
+   {
+      return 'typed';
+   }
+
    public function uninitialized()
    {
       /**
@@ -34,11 +39,13 @@ class TypedProperty extends Feature
 
    public function execute()
    {
-      $this->printOutput([$this->getErrorFromOutputBuffer(fn() => $this->oldDeclaration())], '1) Assignment without type');
-      $this->printOutput([$this->text()], '2) Info');
+      $this->printOutput([$this->text()], '1) Info');
+
+      $this->printOutput([$this->getErrorFromOutputBuffer(fn() => $this->oldDeclaration())], '2) Assignment without type');
+      $this->printOutput([$this->casting()], '3) Casting');
    }
 
-   public function oldDeclaration()
+   private function oldDeclaration()
    {
       /**
        * Dato che $oldAddress non ha un tipo, il suo valore di inizializzazione è NULL. Tuttavia, i tipi possono
@@ -49,7 +56,21 @@ class TypedProperty extends Feature
       return $this->oldAddress;
    }
 
-   public function text(): string
+   private function casting()
+   {
+      $class = new class('7') {
+         public int $i;
+
+         public function __construct(string $i)
+         {
+            $this->i = $i;
+         }
+      };
+
+      return gettype($class->i);
+   }
+
+   private function text(): string
    {
       return <<<EOT
 
@@ -62,8 +83,7 @@ class TypedProperty extends Feature
          6) PHP, essendo un linguaggio dinamico, cercherà di forzare o convertire i tipi ogni volta che può.
             In questo esempio PHP proverà a convertire quella stringa automaticamente:
 
-            function coerce(int \$i)
-            { /* … */ }
+            function coerce(int \$i) { /* … */ }
 
             coerce('1'); // int(1)
 
@@ -72,6 +92,8 @@ class TypedProperty extends Feature
             class Bar
             {
                public int \$i;
+
+               __construct(string \$i) { \$this->\$i = \$i }
             }
 
             \$bar = new Bar;
@@ -86,11 +108,6 @@ class TypedProperty extends Feature
 
             Fatal error: Uncaught TypeError: Typed property Bar::\$i must be int, string used
       EOT;
-   }
-
-   public static function shortFeatureName(): string
-   {
-      return 'typed';
    }
 }
 

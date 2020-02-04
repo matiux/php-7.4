@@ -75,6 +75,8 @@ class ArrowFunction extends Feature
     * Purtroppo ancora non si può :(
     */
    //fn getNumbers(): array => $this->numbers;
+
+
    public function signature(): string
    {
       /**
@@ -97,6 +99,8 @@ class ArrowFunction extends Feature
       } catch (TypeError $e) {
          return $e->getMessage();
       }
+
+      return '';
    }
 
 

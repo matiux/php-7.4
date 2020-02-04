@@ -3,7 +3,7 @@
 namespace Php74\Command;
 
 use Php74\Features\ArrowFunction;
-use Php74\Features\ForeignFunction;
+use Php74\Features\ForeignFunctionInterface\ForeignFunction;
 use Php74\Features\NullCoalescing;
 use Php74\Features\Preloading;
 use Php74\Features\SpreadOperator;
@@ -52,6 +52,9 @@ class ClientCommand extends Command
 
       $feature = $input->getArgument('feature');
 
+      /**
+       * Rifattorizzare con un registro
+       */
       switch ($feature) {
          case  ArrowFunction::shortFeatureName():
             ArrowFunction::create($output)->execute();

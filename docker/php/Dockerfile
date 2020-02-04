@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-configure ffi --with-ffi \
     && docker-php-ext-install ffi
 
+COPY conf/preload.ini $PHP_INI_DIR/conf.d/
+
 COPY conf/xdebug-starter.sh /usr/local/bin/xdebug-starter
 RUN chmod +x /usr/local/bin/xdebug-starter
 RUN /usr/local/bin/xdebug-starter

@@ -15,14 +15,20 @@ use Php74\Features\Feature;
  */
 class Covariance extends Feature
 {
+   public static function shortFeatureName(): string
+   {
+      return 'cova';
+   }
+
    public function execute()
    {
       $micio = (new CatShelter)->adopt('Ciopper');
       $cane = (new DogShelter)->adopt("Fido");
 
-      $this->printOutput([$micio->speak()], '1) Micio');
-      $this->printOutput([$cane->speak()], '2) Cane');
-      $this->printOutput([$this->text()], '3) Info');
+      $this->printOutput([$this->text()], '1) Info');
+
+      $this->printOutput([$micio->speak()], '2) Micio');
+      $this->printOutput([$cane->speak()], '3) Cane');
    }
 
    private function text(): string
@@ -42,10 +48,5 @@ class Covariance extends Feature
          è OK specializzare il tipo restituito: conosciamo almeno l'interfaccia comune di qualsiasi cosa che può
          essere restituita e possiamo trattare tutti questi valori allo stesso modo.
       EOT;
-   }
-
-   public static function shortFeatureName(): string
-   {
-      return 'cova';
    }
 }
