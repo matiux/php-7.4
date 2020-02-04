@@ -26,5 +26,5 @@ clean:
 	-rm -f *.a $(objects)
 	-rm -f *.so $(objects)
 	-rm -f pripper $(objects)
-	#-rm -f go_pripper.header $(objects)
+	-rm -f go_pripper.h $(objects)
 	-rm -f core $(objects)
