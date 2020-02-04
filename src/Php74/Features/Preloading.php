@@ -9,8 +9,13 @@ namespace Php74\Features;
  * https://stitcher.io/blog/preloading-in-php-74
  * https://stitcher.io/blog/php-preload-benchmarks
  */
-class Preloading extends Feature
+final class Preloading extends Feature
 {
+   public static function shortFeatureName(): string
+   {
+      return 'preload';
+   }
+
    public function execute(): void
    {
       $text = <<<EOT
@@ -23,10 +28,5 @@ class Preloading extends Feature
       EOT;
 
       $this->printOutput([$text], '1) Preloading');
-   }
-
-   public static function shortFeatureName(): string
-   {
-      return 'preload';
    }
 }

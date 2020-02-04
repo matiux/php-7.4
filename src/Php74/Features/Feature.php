@@ -28,9 +28,14 @@ abstract class Feature
    {
    }
 
+   public function supports(string $shortcode): bool
+   {
+      return $shortcode === static::shortFeatureName();
+   }
+
    abstract public static function shortFeatureName(): string;
 
-   abstract public function execute();
+   abstract public function execute(): void;
 
    protected function printOutput(array $results, string $headerName)
    {

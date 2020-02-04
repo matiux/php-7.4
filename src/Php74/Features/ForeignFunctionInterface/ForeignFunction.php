@@ -5,7 +5,7 @@ namespace Php74\Features\ForeignFunctionInterface;
 use FFI;
 use Php74\Features\Feature;
 
-class ForeignFunction extends Feature
+final class ForeignFunction extends Feature
 {
    private FFI $ffiPripperGo;
    private FFI $ffiPripperC;
@@ -15,7 +15,7 @@ class ForeignFunction extends Feature
       return 'ffi';
    }
 
-   public function execute()
+   public function execute(): void
    {
       $outputCdef = $this->cdef();
       $outputGoCall = $this->goCall();

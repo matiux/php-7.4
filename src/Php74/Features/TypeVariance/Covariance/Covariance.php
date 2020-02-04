@@ -13,14 +13,14 @@ use Php74\Features\Feature;
  * https://stitcher.io/blog/liskov-and-type-safety
  * https://stitcher.io/blog/liskov-and-type-safety#benefits-of-the-lsp
  */
-class Covariance extends Feature
+final class Covariance extends Feature
 {
    public static function shortFeatureName(): string
    {
       return 'cova';
    }
 
-   public function execute()
+   public function execute(): void
    {
       $micio = (new CatShelter)->adopt('Ciopper');
       $cane = (new DogShelter)->adopt("Fido");

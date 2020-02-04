@@ -10,14 +10,14 @@ namespace Php74\Features;
  * https://stitcher.io/blog/new-in-php-74#null-coalescing-assignment-operator-rfc
  * https://wiki.php.net/rfc/null_coalesce_equal_operator
  */
-class NullCoalescing extends Feature
+final class NullCoalescing extends Feature
 {
    public static function shortFeatureName(): string
    {
       return 'null';
    }
 
-   public function execute()
+   public function execute(): void
    {
       $v1 = $this->phpXNullCoalescingV1();
       $v2 = $this->phpXNullCoalescingV2();

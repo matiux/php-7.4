@@ -3,6 +3,7 @@
 namespace Php74\Command;
 
 use Php74\Features\ArrowFunction;
+use Php74\Features\FeaturesRegistry;
 use Php74\Features\ForeignFunctionInterface\ForeignFunction;
 use Php74\Features\NullCoalescing;
 use Php74\Features\Preloading;
@@ -22,6 +23,7 @@ class ClientCommand extends Command
 
    private array $availableFeature;
    private OutputInterface $output;
+   private FeaturesRegistry $featuresRegistry;
 
    protected function configure()
    {
@@ -50,37 +52,9 @@ class ClientCommand extends Command
       $this->decorateOutput($output);
       $this->validateInputFeature($input);
 
-      $feature = $input->getArgument('feature');
+      $this->buildFeaturesRegistry($output);
 
-      /**
-       * Rifattorizzare con un registro
-       */
-      switch ($feature) {
-         case  ArrowFunction::shortFeatureName():
-            ArrowFunction::create($output)->execute();
-            break;
-         case Preloading::shortFeatureName():
-            Preloading::create($output)->execute();
-            break;
-         case TypedProperty::shortFeatureName():
-            TypedProperty::create($output)->execute();
-            break;
-         case Covariance::shortFeatureName():
-            Covariance::create($output)->execute();
-            break;
-         case Contravariance::shortFeatureName():
-            Contravariance::create($output)->execute();
-            break;
-         case NullCoalescing::shortFeatureName():
-            NullCoalescing::create($output)->execute();
-            break;
-         case SpreadOperator::shortFeatureName():
-            SpreadOperator::create($output)->execute();
-            break;
-         case ForeignFunction::shortFeatureName():
-            ForeignFunction::create($output)->execute();
-            break;
-      }
+      $this->featuresRegistry->get($input->getArgument('feature'))->execute();
 
       return 0;
    }
@@ -99,8 +73,21 @@ class ClientCommand extends Command
       $this->output->getFormatter()->setStyle('fire', $outputStyle);
 
       if (!in_array($input->getArgument('feature'), $this->availableFeature)) {
-         $this->output->writeln('<fire>Invalid feature</>');
+         $this->output->writeln('<fire>Invalid feature</fire>');
          die();
       }
+   }
+
+   private function buildFeaturesRegistry(OutputInterface $output)
+   {
+      $this->featuresRegistry = new FeaturesRegistry();
+      $this->featuresRegistry->add(ArrowFunction::create($output));
+      $this->featuresRegistry->add(Preloading::create($output));
+      $this->featuresRegistry->add(TypedProperty::create($output));
+      $this->featuresRegistry->add(Covariance::create($output));
+      $this->featuresRegistry->add(Contravariance::create($output));
+      $this->featuresRegistry->add(NullCoalescing::create($output));
+      $this->featuresRegistry->add(SpreadOperator::create($output));
+      $this->featuresRegistry->add(ForeignFunction::create($output));
    }
 }

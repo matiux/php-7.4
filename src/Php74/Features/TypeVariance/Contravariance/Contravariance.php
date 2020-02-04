@@ -15,9 +15,14 @@ use Php74\Features\TypeVariance\Covariance\DogShelter;
  * https://stitcher.io/blog/liskov-and-type-safety
  * https://stitcher.io/blog/liskov-and-type-safety#benefits-of-the-lsp
  */
-class Contravariance extends Feature
+final class Contravariance extends Feature
 {
-   public function execute()
+   public static function shortFeatureName(): string
+   {
+      return 'contrava';
+   }
+
+   public function execute(): void
    {
       $micio = (new CatShelter)->adopt("Ciopper");
       $croccantini = new AnimalFood();
@@ -52,10 +57,5 @@ class Contravariance extends Feature
          i client possono ancora passare un tipo di cibo specializzato all' "Animale" senza sapere esattamente se
          si tratta di un "Cat" o "Dog".
       EOT;
-   }
-
-   public static function shortFeatureName(): string
-   {
-      return 'contrava';
    }
 }

@@ -14,7 +14,7 @@ use TypeError;
  * https://wiki.php.net/rfc/arrow_functions_v2
  * https://stitcher.io/blog/short-closures-in-php
  */
-class ArrowFunction extends Feature
+final class ArrowFunction extends Feature
 {
    private array $numbers = [1, 2];
 
@@ -28,7 +28,7 @@ class ArrowFunction extends Feature
       return 'arrow';
    }
 
-   public function execute()
+   public function execute(): void
    {
       $this->printOutput($this->cube([1, 2]), '1) Basic usage: cube');
       $this->printOutput([$this->scope()], '2) Parent scope');
