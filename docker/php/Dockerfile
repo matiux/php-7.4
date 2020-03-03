@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-install ffi
 
 COPY conf/preload.ini $PHP_INI_DIR/conf.d/
+RUN rm /usr/local/etc/php/conf.d/docker-php-memlimit.ini
+ADD conf/php.ini /usr/local/etc/php
 
 COPY conf/xdebug-starter.sh /usr/local/bin/xdebug-starter
 RUN chmod +x /usr/local/bin/xdebug-starter
